@@ -72,7 +72,7 @@ Paladin is built to be added to one discord, and as such has a lot of customisat
 | File in need of customisation | Line(s) to customise | What information to add |
 | --- | --- | --- |
 |  .envEXAMPLE | 1-4  | Explained in file. Also rename to ".env"  |
-| config.json | 2-4 | For future commands, "testServer" to test server ID,  "clientID" to Application ID, "Devs" array to include developers discord account IDs"
+| config.json | 2-4 | For future commands, change "testServer" to test server ID,  "clientID" to Application ID which can be found [here][2], "Devs" array to include developers discord account IDs"
 |   infoupdate.js | 177, 179, 201-206, 215 | Each specified individually in file|
 | eventHandler.js | 27, 32, 42 | Specified in file |
 | bannedWords.js | 1 | Add banned words, users with those words in their usernames will not be allowed in the server. |
