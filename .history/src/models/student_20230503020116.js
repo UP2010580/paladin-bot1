@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require("dotenv").config();
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -17,38 +17,34 @@ const studentSchema = new Schema({
     required: true,
     unique: true,
     validate: {
-      validator: function (v) {
+      validator: function(v) {
         return /^[uU][pP]\d{6,10}$/.test(v);
       },
-      message: props => `${props.value} is not a valid UP number!`,
-    },
+      message: props => `${props.value} is not a valid UP number!`
+    }
   },
   courseCode: {
     type: String,
-    required: true,
+    required: true
   },
   currentYear: {
     type: String,
-    required: true,
-  },
-  graduationStatus: {
-    type: Boolean,
-    required: true,
+    required: true
   },
   firstName: {
     type: String,
-    required: true,
+    required: true
   },
   lastName: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
-// If student schema already exists, delete it and later replace it.
+//If student schema already exists, delete it and later replace it.
 
 module.exports = mongoose.model('Student', studentSchema);
 
-if (mongoose.connection.models.Student) {
-  delete mongoose.connection.models.Student;
+if (mongoose.connection.models['Student']) {
+  delete mongoose.connection.models['Student'];
 }

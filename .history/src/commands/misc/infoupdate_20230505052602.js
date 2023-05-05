@@ -151,7 +151,6 @@ module.exports = {
       _id: `${upNumber}`,
       courseCode: `${courseCode}`,
       currentYear: `${currentYear}`,
-      graduationStatus: `${graduationStatus}`,
       firstName: `${firstName}`,
       lastName: `${lastName}`,
     });

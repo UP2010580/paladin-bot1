@@ -2,26 +2,28 @@ const { testServer } = require('../../../config.json');
 const areCommandsDifferent = require('../../utils/areCommandsDifferent');
 const getApplicationCommands = require('../../utils/getApplicationCommands');
 const getLocalCommands = require('../../utils/getLocalCommands');
+const mongoose = require('mongoose');
 
 module.exports = async (client) => {
   try {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-      testServer,
+      testServer
     );
 
     for (const localCommand of localCommands) {
       const { name, description, options } = localCommand;
 
       const existingCommand = await applicationCommands.cache.find(
-        (cmd) => cmd.name === name,
+        (cmd) => cmd.name === name
       );
 
-      // Check if the command is infoupdate
-      if (name === 'infoupdate') {
-        // Access the mongoose module from the infoupdate command object
-      }
+        // Check if the command is infoupdate
+  if (name === "infoupdate") {
+    // Access the mongoose module from the infoupdate command object
+    const mongoose = localCommand.mongoose;
+  }
 
       if (existingCommand) {
         if (localCommand.deleted) {
@@ -41,7 +43,7 @@ module.exports = async (client) => {
       } else {
         if (localCommand.deleted) {
           console.log(
-            `Skipping registering command "${name}" as it's set to delete.`,
+            `Skipping registering command "${name}" as it's set to delete.`
           );
           continue;
         }

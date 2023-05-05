@@ -1,7 +1,10 @@
-require('dotenv').config();
-const { Client, IntentsBitField } = require('discord.js');
-const mongoose = require('mongoose');
-const eventHandler = require('./handlers/eventHandler');
+require("dotenv").config();
+const { Client, IntentsBitField, Collection, GatewayIntentBits, Partials } = require("discord.js");
+const { Guilds, GuildMembers, GuildMessages } = GatewayIntentBits;
+const { User, Message, GuildMember, ThreadMember } = Partials;
+const mongoose = require("mongoose");
+const { MongoClient } = require("mongodb");
+const eventHandler = require("./handlers/eventHandler");
 
 const client = new Client({
   intents: [
@@ -26,3 +29,4 @@ const client = new Client({
     console.log(`Error: ${error}`);
   }
 })();
+

@@ -31,10 +31,6 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
-  graduationStatus: {
-    type: Boolean,
-    required: true,
-  },
   firstName: {
     type: String,
     required: true,

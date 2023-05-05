@@ -2,6 +2,7 @@ const { ApplicationCommandOptionType } = require('discord.js');
 require('dotenv').config();
 const codes = require('../../models/courseCodes');
 const mongoose = require('mongoose');
+const studentSchema = require('../../models/student');
 const { Schema } = require('mongoose');
 const Student = require('../../models/student');
 // Export the actual command
@@ -111,36 +112,6 @@ module.exports = {
         console.error('Error connecting to MongoDB:', err);
       });
     // Define the document schema
-    const studentSchema = new Schema({
-      _id: {
-        type: Schema.Types.ObjectId,
-        default: () => new mongoose.Types.ObjectId(),
-      },
-      courseCode: {
-        type: String,
-        required: true,
-      },
-      currentYear: {
-        type: String,
-        required: true,
-      },
-      graduationStatus: {
-        type: Boolean,
-        required: true,
-      },
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-      upNumber: {
-        type: String,
-        required: true,
-      },
-    });
     mongoose.model('Student', studentSchema);
     // if schema exists, delete it
     if (mongoose.connection.models.Student) {
@@ -151,7 +122,6 @@ module.exports = {
       _id: `${upNumber}`,
       courseCode: `${courseCode}`,
       currentYear: `${currentYear}`,
-      graduationStatus: `${graduationStatus}`,
       firstName: `${firstName}`,
       lastName: `${lastName}`,
     });

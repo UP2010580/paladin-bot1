@@ -1,4 +1,4 @@
-const configDb = require('../models/MemberLog');
+const configDb = require("../models/MemberLog");
 
 async function loadConfig(client) {
   (await configDb.find()).forEach((doc) => {
@@ -8,7 +8,7 @@ async function loadConfig(client) {
       botRole: doc.botRole,
     });
   });
-  return console.log('Loaded guild configurations to the collection.');
+  return console.log("Loaded guild configurations to the collection.");
 }
 
 module.exports = { loadConfig };

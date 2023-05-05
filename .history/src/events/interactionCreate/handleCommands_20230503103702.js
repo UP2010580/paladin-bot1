@@ -1,6 +1,23 @@
 const { devs, testServer } = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 const mongoose = require('mongoose');
+const { Client,
+  GatewayIntentBits,
+  EmbedBuilder,
+  PermissionsBitField,
+  Permissions,
+  MessageManager,
+  Message,
+  Embed,
+  Collection,
+  Events,
+  Guild,
+  ApplicationCommandOptionType,
+SlashCommandBuilder,
+ChatInputCommandInteraction,
+ChannelType }= require('discord.js');
+const path = require('path');
+const getAllFiles = require('../../utils/getAllFiles');
 
 module.exports = async (client, interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -9,11 +26,11 @@ module.exports = async (client, interaction) => {
 
   try {
     const commandObject = localCommands.find(
-      (cmd) => cmd.name === interaction.commandName,
+      (cmd) => cmd.name === interaction.commandName
     );
 
     if (!commandObject) return;
-    // check if the command is dev only, and that the user of the command is a developper
+      //check if the command is dev only, and that the user of the command is a developper
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
         interaction.reply({
@@ -23,7 +40,7 @@ module.exports = async (client, interaction) => {
         return;
       }
     }
-    // check if the command is test only, and that the server it is used in is the test server
+    //check if the command is test only, and that the server it is used in is the test server
     if (commandObject.testOnly) {
       if (!(interaction.guild.id === testServer)) {
         interaction.reply({
@@ -64,4 +81,5 @@ module.exports = async (client, interaction) => {
   } catch (error) {
     console.log(`There was an error running this command: ${error}`);
   }
+  
 };
