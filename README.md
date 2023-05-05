@@ -50,17 +50,21 @@ You may need to run powershell in administrator and run ```Set-ExecutionPolicy R
 
 Once complete, begin configuration.
 
-
-
 ## Configuration
-
 
 ### Suggested roles and channels to add
 
 |Role | Explanation |
 | - | -------|
 | Initial Role | This is the role given to users when they join the server, so it should have low permissions. I reccomend making it able to see only one channel, the join channel|
-| 
+| Match role and course code | In /infoupdate command, match the case with the role that is added to the user in the trycatch block |
+| Year Roles | Create roles for each different year, note that the roles begin at 1 and not 0 |
+
+| Channel | Explanation |
+| - | -------|
+| Moderator Only channel | A channel that you need to have moderator (or higher) permissions in order to see|
+| Join channel | This is the channel that users with the initial role should be able to see. To reduce clutter in servers, remove this from view of anyone who doesn't have the initial role, otherwise it's convenient to keep it there so users can see the reply from using /infoUpdate |
+
 
 Paladin is built to be added to one discord, and as such has a lot of customisation to do before it is completely ready to be updated. Below is a list of files that need customisation before the bot will be operational, which line needs to be updated, and what information needs to be added.
 
