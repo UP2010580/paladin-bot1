@@ -43,7 +43,7 @@ module.exports = (client) => {
         const joinChannel = client.channels.cache.get(joinChannelID);
         console.log('Username is okay');
         if (joinChannel) {
-          joinChannel.send(`Welcome to the server, ${member.toString()}, Please use /infoupdate to gain access!`);// you can change this message to anything
+          joinChannel.send(`Welcome to the server, ${member.toString()}, Please use /inforole to gain access!`);// you can change this message to anything
         }
       }
     });

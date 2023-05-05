@@ -167,6 +167,8 @@ module.exports = {
       const code = codes[i];
       // Check if courseCode matches the current word
       if (courseCode === code) {
+        const channelID = '1049739223059681330'; // Change to channel ID of where users can see after using /infoupdate
+        const channel = await interaction.client.channels.fetch(channelID);
         // Perform a different action for each course code in the courseCodes.js file
         switch (code) {
           case 'G600':
@@ -182,13 +184,21 @@ module.exports = {
           case 'other':
             // Do something for next code, most likely add a different role, if so copy the above trycatch block, paste here and edit as necessary
             console.log('Second role');
-            break;// Add more cases for other words as needed
+            break;
+            // Add more cases for other words as needed
+          default:// Default is the behaviour for when a code you haven't added into the courseCodes.js file is called
+            try {
+              const testRole = '1049739224452186143';
+              await guildMember.roles.add(interaction.guild.roles.cache.get(testRole));
+              console.log(`Assigned role ${testRole} to ${member.user.tag} TESTROLE DEFAULT`);
+            } catch (error) {
+              console.log(error);
+              console.log(`Error assigning role: ${error}`);
+            }
+            break;
         }
-        // If courseCode matches a course code defined in courseCodes.js, exit the loop to prevent unnecessary comparisons
+        // If courseCode matches a word, exit the loop to prevent unnecessary comparisons
         break;
-      } else if (i === codes.length - 1) {
-        // If courseCode doesn't match any course code defined in courseCodes.js, perform some default action, it could be to send a message to a channel the user will be able to see perhaps
-        console.log(`No role assigned for course code ${courseCode}`);
       }
     }
     if (currentYear >= 1 && currentYear <= 6) {

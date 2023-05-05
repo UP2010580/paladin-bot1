@@ -167,7 +167,8 @@ module.exports = {
       const code = codes[i];
       // Check if courseCode matches the current word
       if (courseCode === code) {
-        // Perform a different action for each course code in the courseCodes.js file
+        const channelID = '1049739223059681330'; // Change to channel ID of where users can see after using /infoupdate
+        // Perform a different action for each word
         switch (code) {
           case 'G600':
             try {
@@ -180,15 +181,17 @@ module.exports = {
             }
             break;
           case 'other':
-            // Do something for next code, most likely add a different role, if so copy the above trycatch block, paste here and edit as necessary
+            // Do something for next code, most likely add a different role, if so copy above, paste here and edit as necessary
             console.log('Second role');
-            break;// Add more cases for other words as needed
+            break;
+            // Add more cases for other words as needed
+          default:
+            channelID.send({ content: 'That is a course code I don\'t recognise!', ephemeral: true });
+            // Do something if courseCode matches a word not defined in the switch statement
+            break;
         }
-        // If courseCode matches a course code defined in courseCodes.js, exit the loop to prevent unnecessary comparisons
+        // If courseCode matches a word, exit the loop to prevent unnecessary comparisons
         break;
-      } else if (i === codes.length - 1) {
-        // If courseCode doesn't match any course code defined in courseCodes.js, perform some default action, it could be to send a message to a channel the user will be able to see perhaps
-        console.log(`No role assigned for course code ${courseCode}`);
       }
     }
     if (currentYear >= 1 && currentYear <= 6) {

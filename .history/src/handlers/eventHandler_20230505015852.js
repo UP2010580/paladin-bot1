@@ -28,7 +28,9 @@ module.exports = (client) => {
       member.roles.add(role).catch(console.error).then(() => {
         console.log('Assigned initial role');
       });
-      if (words.some(word => member.user.username.includes(word))) {
+      console.log(words);
+      console.log(member.user.username);
+      if (words.some(word => word === member.user.username.includes(word))) {
         const modChannelID = '1068137279907975249';// Change this to a moderator channel.
         const modChannel = client.channels.cache.get(modChannelID);
         if (modChannel) {
@@ -43,7 +45,7 @@ module.exports = (client) => {
         const joinChannel = client.channels.cache.get(joinChannelID);
         console.log('Username is okay');
         if (joinChannel) {
-          joinChannel.send(`Welcome to the server, ${member.toString()}, Please use /infoupdate to gain access!`);// you can change this message to anything
+          joinChannel.send(`Welcome to the server, @${member.toString()}, Please use /inforole to gain access!`);// you can change this message to anything
         }
       }
     });

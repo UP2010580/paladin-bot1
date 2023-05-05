@@ -1,0 +1,3 @@
+{
+    "bannedWords": ["Tester123456"]
+}

@@ -1,6 +1,5 @@
 const { ApplicationCommandOptionType, Guild } = require('discord.js');
 require('dotenv').config();
-const codes = require('../../models/courseCodes');
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const Student = require('../../models/student');
@@ -80,7 +79,6 @@ module.exports = {
     const lastName = interaction.options.getString('last-name');
     const currentYear = interaction.options.getString('current-year');
     const courseCode = interaction.options.getString('course-code');
-    const member = interaction.member;
     const graduationStatus =
       interaction.options.getBoolean('graduation-status');
     interaction.reply('Information collected, thank you!');
@@ -162,35 +160,6 @@ module.exports = {
 
     console.log('created guildID Constant');
 
-    // Loop through the array of words
-    for (let i = 0; i < codes.length; i++) {
-      const code = codes[i];
-      // Check if courseCode matches the current word
-      if (courseCode === code) {
-        // Perform a different action for each course code in the courseCodes.js file
-        switch (code) {
-          case 'G600':
-            try {
-              const softwareEngineerRoleID = '1103876372222447747';
-              await guildMember.roles.add(interaction.guild.roles.cache.get(softwareEngineerRoleID));
-              console.log(`Assigned role ${softwareEngineerRoleID} to ${member.user.tag}`);
-            } catch (error) {
-              console.log(error);
-              console.log(`Error assigning role: ${error}`);
-            }
-            break;
-          case 'other':
-            // Do something for next code, most likely add a different role, if so copy the above trycatch block, paste here and edit as necessary
-            console.log('Second role');
-            break;// Add more cases for other words as needed
-        }
-        // If courseCode matches a course code defined in courseCodes.js, exit the loop to prevent unnecessary comparisons
-        break;
-      } else if (i === codes.length - 1) {
-        // If courseCode doesn't match any course code defined in courseCodes.js, perform some default action, it could be to send a message to a channel the user will be able to see perhaps
-        console.log(`No role assigned for course code ${courseCode}`);
-      }
-    }
     if (currentYear >= 1 && currentYear <= 6) {
       const roleIdArray = {
         1: '1103243689108721744', // Replace with desired role IDs
@@ -201,22 +170,21 @@ module.exports = {
         6: '1103243860173406228',
       };
       console.log('Created role IDs array');
-      const guildMember = await interaction.guild.members.fetch(interaction.user.id);
       const roleId = roleIdArray[currentYear];
       if (!roleId) {
         console.log(`No role ID found for year ${currentYear}`);
         return;
       }
+      const member = interaction.member;
       const initialRole = '1068136999644565585';// You will need to change this to the same ID as your initial role.
       if (!member) {
         console.log('Member not found');
         return;
       }
       try {
-        await guildMember.roles.add(interaction.guild.roles.cache.get(roleId));
+        member.roles.add([roleId]);
         console.log(`Assigned role ${roleId} to ${member.user.tag}`);
         member.roles.remove([initialRole]);
-        console.log(`Removed role ${initialRole} from ${member.user.tag}`);
       } catch (error) {
         console.log(error);
         console.log(`Error assigning role: ${error}`);

@@ -187,7 +187,7 @@ module.exports = {
         // If courseCode matches a course code defined in courseCodes.js, exit the loop to prevent unnecessary comparisons
         break;
       } else if (i === codes.length - 1) {
-        // If courseCode doesn't match any course code defined in courseCodes.js, perform some default action, it could be to send a message to a channel the user will be able to see perhaps
+        // If courseCode doesn't match any course code defined in courseCodes.js, perform some default action
         console.log(`No role assigned for course code ${courseCode}`);
       }
     }

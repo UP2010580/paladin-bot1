@@ -24,11 +24,13 @@ module.exports = (client) => {
   client.on(Events.GuildMemberAdd, (member) => { // every time a user joins
     console.log('User joined'); // log for testing (remove in final)
     client.guilds.fetch(process.env.GUILD_ID).then((guild) => {
-      const role = guild.roles.cache.find((role) => role.id === '1068136999644565585'); // You will need to change this to the role ID of the role you want to add to users upon joining
+      const role = guild.roles.cache.find((role) => role.id === '1068136999644565585'); // YOU WILL NEED TO CHANGE THIS TO THE ROLE YOU WANT!
       member.roles.add(role).catch(console.error).then(() => {
         console.log('Assigned initial role');
       });
-      if (words.some(word => member.user.username.includes(word))) {
+      console.log(words);
+      console.log(member.user.username);
+      if (words.some(word => word === member.user.username)) {
         const modChannelID = '1068137279907975249';// Change this to a moderator channel.
         const modChannel = client.channels.cache.get(modChannelID);
         if (modChannel) {
@@ -40,11 +42,12 @@ module.exports = (client) => {
         });
       } else {
         const joinChannelID = '1068137279907975249'; // Change this to the same channel where users join
-        const joinChannel = client.channels.cache.get(joinChannelID);
-        console.log('Username is okay');
-        if (joinChannel) {
-          joinChannel.send(`Welcome to the server, ${member.toString()}, Please use /infoupdate to gain access!`);// you can change this message to anything
-        }
+        const joinChannel = client.channel.cache.get(joinChannelID);
+        console.log('Username is okay').then(() => {
+          if (joinChannel) {
+            joinChannel.send(`Welcome to the server, @${member.user.tag}`);
+          }
+        });
       }
     });
   });
