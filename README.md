@@ -82,6 +82,14 @@ Paladin is built to be added to one discord, and as such has a lot of customisat
 
 Once configured, run ```nodemon``` and your bot should come online. Every time you make a change to your folder, with nodemon, your bot will be restarted upon saving.
 
+## Misc
+
+  When creating new commands there are some options that the command handler looks out for, including these:
+  
+  devOnly: Boolean, true defines as dev only, meaning only people's who's id's match the "Devs" array in config.json can execute this command
+  testOnly: Boolean, true defines as test only, meaning it can only be executed in the server with the ID that matches the "test" in config.json
+  deleted: Boolean, true defines a a deleted command, a deleted command will not be registered by the command handler upon startup
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

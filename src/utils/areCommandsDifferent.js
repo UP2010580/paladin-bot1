@@ -53,3 +53,5 @@ module.exports = (existingCommand, localCommand) => {
 
   return false;
 };
+
+/* This script essentially takes a look at every aspect of a command and compares it to the next command, if the aspects of a command are the same, the command is the same */

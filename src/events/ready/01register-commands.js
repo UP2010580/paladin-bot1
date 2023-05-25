@@ -18,11 +18,6 @@ module.exports = async (client) => {
         (cmd) => cmd.name === name,
       );
 
-      // Check if the command is infoupdate
-      if (name === 'infoupdate') {
-        // Access the mongoose module from the infoupdate command object
-      }
-
       if (existingCommand) {
         if (localCommand.deleted) {
           await applicationCommands.delete(existingCommand.id);
@@ -41,7 +36,7 @@ module.exports = async (client) => {
       } else {
         if (localCommand.deleted) {
           console.log(
-            `Skipping registering command "${name}" as it's set to delete.`,
+            `Skipping registering command "${name}" as it's set to deleted.`,
           );
           continue;
         }

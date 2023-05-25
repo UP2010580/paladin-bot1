@@ -24,7 +24,7 @@ module.exports = (client) => {
   client.on(Events.GuildMemberAdd, (member) => { // every time a user joins
     console.log('User joined'); // log for testing (remove in final)
     client.guilds.fetch(process.env.GUILD_ID).then((guild) => {
-      const role = guild.roles.cache.find((role) => role.id === '1068136999644565585'); // You will need to change this to the Initial role
+      const role = guild.roles.cache.find((role) => role.id === '1068136999644565585'); // You will need to change this to the Initial role ID you want
       member.roles.add(role).catch(console.error).then(() => {
         console.log('Assigned initial role');
       });

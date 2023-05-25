@@ -10,7 +10,7 @@ module.exports = (exceptions = []) => {
   );
 
   for (const commandCategory of commandCategories) {
-    const commandFiles = getAllFiles(commandCategory);
+    const commandFiles = getAllFiles(commandCategory); // using the getAllFiles function to get the files from the commands folder
 
     for (const commandFile of commandFiles) {
       const commandObject = require(commandFile);

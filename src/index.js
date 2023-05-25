@@ -3,7 +3,7 @@ const { Client, IntentsBitField } = require('discord.js');
 const mongoose = require('mongoose');
 const eventHandler = require('./handlers/eventHandler');
 
-const client = new Client({
+const client = new Client({ // the intents must be declared in order for the bot to function
   intents: [
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMembers,

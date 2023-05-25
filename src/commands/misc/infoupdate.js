@@ -73,7 +73,7 @@ module.exports = {
       required: true,
     },
   ],
-  // handle the interaction
+  // handle the interaction, the command handler is listening for the callback function
   callback: async (client, interaction, mongoose) => { // first, define constants that will be used later
     const upNumber = interaction.options.getString('up-number');
     const firstName = interaction.options.getString('first-name');
@@ -89,8 +89,8 @@ module.exports = {
         Last Name: ${lastName}
         Current Year: ${currentYear}
         Course Code: ${courseCode}
-        Graduation Status: ${graduationStatus}`);
-    const newName = `${firstName} ${lastName.charAt(0)}/${upNumber}`;
+        Graduation Status: ${graduationStatus}`); // log the information, allowing for debugging if required
+    const newName = `${firstName} ${lastName.charAt(0)}/${upNumber}`; // logic for creating the nickname in the server, this takes the first name, first letter of 2nd name and UP number
     const guildMember = await interaction.guild.members.fetch(
       interaction.user.id,
     );
@@ -142,7 +142,7 @@ module.exports = {
       },
     });
     mongoose.model('Student', studentSchema);
-    // if schema exists, delete it
+    // if this schema exists, delete it to be replaced (it will be the same)
     if (mongoose.connection.models.Student) {
       delete mongoose.connection.models.Student;
     }
@@ -217,7 +217,7 @@ module.exports = {
         console.log('Member not found');
         return;
       }
-      try {
+      try { // try remove initial role and assign course role to allow server access, catch an error for degugging
         await guildMember.roles.add(interaction.guild.roles.cache.get(roleId));
         console.log(`Assigned role ${roleId} to ${member.user.tag}`);
         member.roles.remove([initialRole]);

@@ -22,3 +22,5 @@ module.exports = (directory, foldersOnly = false) => {
 
   return fileNames;
 };
+
+/* logic to get the files from a specific directory, can be called in any file */

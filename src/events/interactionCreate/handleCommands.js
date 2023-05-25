@@ -33,7 +33,7 @@ module.exports = async (client, interaction) => {
         return;
       }
     }
-
+    // check the permissions of the comman user, and if they are great enough
     if (commandObject.permissionsRequired?.length) {
       for (const permission of commandObject.permissionsRequired) {
         if (!interaction.member.permissions.has(permission)) {
@@ -45,7 +45,7 @@ module.exports = async (client, interaction) => {
         }
       }
     }
-
+    // check if the bot has enough permissions to execute a command
     if (commandObject.botPermissions?.length) {
       for (const permission of commandObject.botPermissions) {
         const bot = interaction.guild.members.me;
@@ -59,7 +59,7 @@ module.exports = async (client, interaction) => {
         }
       }
     }
-
+    // each comman needs to have it's function called "callback", this allows the command handler to listen to it
     await commandObject.callback(client, interaction, mongoose);
   } catch (error) {
     console.log(`There was an error running this command: ${error}`);
